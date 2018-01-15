@@ -30,10 +30,10 @@ http://draalin.com/installing-asterisk-in-ubuntu/
 
 * TODO: config /etc/asterisk/DAHDI.conf
 
-# Run
+# Start the robocall_server
         $ python ./robocall_server.py
 
 
-# Example URI
+# Making a call request from any web client
         http://192.168.25.220:8080/robocall?roomId=6001
 
