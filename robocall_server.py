@@ -13,21 +13,20 @@ class RequestHandler(BaseHTTPRequestHandler):
         
         request_path = self.path
         
-        print("\n----- Request Start ----->\n")
+        #print("\n----- Request Start ----->\n")
         parsed_path = urlparse.urlparse(self.path)
         #print(parsed_path)
         if parsed_path.path == "/robocall":
             #print("path matched!\n")
             d = urlparse.parse_qs(parsed_path.query)
             #print(d['roomId'][0])
-            #print(parsed_path.query.roomId)
             #cmd = "echo kkuei | sudo -S asterisk -rx \"channel originate SIP/6001 extension 100@from-internal\""
             cmd = "echo kkuei | sudo -S asterisk -rx \"channel originate SIP/" + d['roomId'][0] + " extension 100@from-internal\""
             os.system(cmd)
 
         #print(request_path)
         #print(self.headers)
-        print("<----- Request End -----\n")
+        #print("<----- Request End -----\n")
         
         self.send_response(200)
         self.send_header("Set-Cookie", "foo=bar")
