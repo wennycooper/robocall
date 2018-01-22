@@ -43,4 +43,5 @@ http://draalin.com/installing-asterisk-in-ubuntu/
 * https://www.voip-info.org/wiki/view/Asterisk+cmd+Originate+Chinese
 
 (譯者註:originate的用途是向客戶端發起呼叫，將客戶端引入到Dialplan中，並從exten的首項開始執行，進行一系列操作。雖然客戶端是被動接受，但此過程相當於主動撥入的過程。CLI> channel originate DAHDI/1/0123456789 extension 123@from-pstn  會從 DAHDI/1 界面撥號0123456789, 相當於外面有人播入到 dialplan 123)
+* https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manual.pdf
 * https://www.voip-info.org/wiki/view/Asterisk+auto-dial+out
