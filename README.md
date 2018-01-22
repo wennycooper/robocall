@@ -37,3 +37,9 @@ http://draalin.com/installing-asterisk-in-ubuntu/
 # Making a call request from any web client
         http://192.168.25.220:8080/robocall?roomId=6001
 
+
+# Reference
+* https://www.lessons4you.info/how-to-originate-call-from-asterisk-cli/
+* https://www.voip-info.org/wiki/view/Asterisk+cmd+Originate+Chinese
+(譯者註:originate的用途是向客戶端發起呼叫，將客戶端引入到Dialplan中，並從exten的首項開始執行，進行一系列操作。雖然客戶端是被動接受，但此過程相當於主動撥入的過程。)
+* https://www.voip-info.org/wiki/view/Asterisk+auto-dial+out
