@@ -1,6 +1,10 @@
 #!/usr/bin/python
 import cherrypy
 import os
+import os.path
+import time
+
+callLog = "/var/spool/asterisk/outgoing_done/demo-congrats.call"
 
 class robocall_server(object):
     @cherrypy.expose
@@ -9,9 +13,20 @@ class robocall_server(object):
 
     @cherrypy.expose
     def robocall(self, roomId=0):
-        cmd = "echo kkuei | sudo -S asterisk -rx \"channel originate SIP/" + str(int(roomId)) + " extension 100@from-internal\""
+        cmd = "/home/kkuei/catkin_ws/src/robocall/demo-call.py " + roomId
+        cmd1 = "/home/kkuei/catkin_ws/src/robocall/check_call_status.py"
         os.system(cmd)
-        return "robocall with roomId = " + str((int(roomId)))
+                
+        value = os.system(cmd1)
+        value = value >> 8
+        print "call status= ",value
+        if value == 1:
+           return "Status = Completed"
+        elif value == 255:
+           return "Status = Expired"
+
+        return str(value)
+        #return "robocall with roomId = " + str(int(roomId))
 
 if __name__ == '__main__':
     cherrypy.server.socket_host = '0.0.0.0'

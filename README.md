@@ -35,7 +35,7 @@ http://draalin.com/installing-asterisk-in-ubuntu/
 
 
 # Making a call request from any web client
-        http://192.168.25.220:8080/robocall?roomId=6001
+        http://192.168.30.83:8080/robocall?roomId=6001
 
 
 # Reference
