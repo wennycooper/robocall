@@ -37,6 +37,9 @@ http://draalin.com/installing-asterisk-in-ubuntu/
 # Making a call request from any web client
         http://192.168.30.83:8080/robocall?roomId=6001
 
+# Response
+* Status: Completed
+* Status: Expired
 
 # Reference
 * https://www.lessons4you.info/how-to-originate-call-from-asterisk-cli/
