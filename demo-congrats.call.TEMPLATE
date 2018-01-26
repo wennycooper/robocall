@@ -1,0 +1,6 @@
+MaxRetries: 1
+RetryTime: 60
+WaitTime: 30
+Context: from-internal
+Extension: 100
+Archive: Yes

@@ -4,8 +4,6 @@ import os
 import os.path
 import time
 
-callLog = "/var/spool/asterisk/outgoing_done/demo-congrats.call"
-
 class robocall_server(object):
     @cherrypy.expose
     def index(self):
@@ -19,11 +17,11 @@ class robocall_server(object):
                 
         value = os.system(cmd1)
         value = value >> 8
-        print "call status= ",value
+        print "call status = ", value
         if value == 1:
-           return "Status = Completed"
+           return "Status: Completed"
         elif value == 255:
-           return "Status = Expired"
+           return "Status: Expired"
 
         return str(value)
         #return "robocall with roomId = " + str(int(roomId))

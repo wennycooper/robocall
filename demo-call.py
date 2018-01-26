@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import sys,os
 
-TEMPLATE_CALLFILE = "/home/kkuei/demo-congrats.call.TEMPLATE"
-CALLFILE = "/home/kkuei/demo-congrats.call"
+TEMPLATE_CALLFILE = "/home/kkuei/catkin_ws/src/robocall/demo-congrats.call.TEMPLATE"
+CALLFILE = "/home/kkuei/catkin_ws/src/robocall/demo-congrats.call"
 OUTGOING_PATH = "/var/spool/asterisk/outgoing/"
 OUTGOING_DONE_PATH = "/var/spool/asterisk/outgoing_done/"
 
