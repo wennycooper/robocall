@@ -27,12 +27,12 @@ class robocall_server(object):
                             print "Wait for dahdi channel resource!"
                             time.sleep(10)
                             break
-                        elif bool(re.search("KKUEI ext5",line)):
+                        elif bool(re.search("KKUEI ext0",line)):
                             user_pick_up = True
                     else:       # print "Hungup"
                         time.sleep(5)
                         if not user_pick_up:
-                            print "Hangup but not pressing 5... back to loop"
+                            print "Hangup but not pressing 0... back to loop"
                         loop_count += 1
                         break
             elif user_pick_up:
