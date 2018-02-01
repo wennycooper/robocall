@@ -79,6 +79,9 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 # Start the robocall_server
         $ sudo python ./robocall_server.py
 
+# or add following line in startup script /etc/rc.local
+
+        /usr/bin/python /home/advrobot/robocall/robocall_server.py
 
 # Making a call request from any web client
         http://192.168.30.222:8080/robocall?roomId=15
