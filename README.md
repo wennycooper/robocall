@@ -16,17 +16,26 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 
       [from-internal]
       exten = 100,1,Answer()
-      same = n,Wait(1)
+       same = n,Wait(5)
       ; same = n,NoOp(hello_kkuei)
       ; same = n,Playback(demo-instruct)
-      same = n,Background(demo-instruct)
-      same = n,WaitExten(30)
-      same = n,Hangup()
-          
+       same = n,Background(baidu_tts_1)
+       same = n,Wait(1)
+       same = n,Background(baidu_tts_2)
+       same = n,WaitExten(2)
+       same = n,Background(baidu_tts_1)
+       same = n,Wait(1)
+       same = n,Background(baidu_tts_2)
+       same = n,WaitExten(2)
+       same = n,Background(baidu_tts_1)
+       same = n,Wait(1)
+       same = n,Background(baidu_tts_2)
+       same = n,WaitExten(10)
+       same = n,Hangup()
+      
       exten = 0,1,NoOp(KKUEI ext0)
-          
       exten = 5,1,NoOp(KKUEI ext0)
-
+      
 
 * config /etc/asterisk/sip.conf
 
