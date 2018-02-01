@@ -1,6 +1,6 @@
 # robocall
 Robocall is a web service to make a phone call to deliver a pre-recorded messages from AMR robot. 
-Callee must anwser the call and press 5 to confirm, or the caller will redial for 3 times.
+Callee must anwser the call and press a "0" to confirm, or the caller will redial for several times.
 
 # Dependancy
 * Asterisk installation
@@ -23,9 +23,9 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
       same = n,WaitExten(30)
       same = n,Hangup()
           
-      exten = 5,1,NoOp(KKUEI ext5)
+      exten = 0,1,NoOp(KKUEI ext0)
           
-      exten = 6,1,NoOp(KKUEI ext6)
+      exten = 5,1,NoOp(KKUEI ext0)
 
 
 * config /etc/asterisk/sip.conf
