@@ -90,6 +90,12 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 * Status: Completed
 * Status: Expired
 
+# Convert wav file to gsm file
+* wav file must be in 16 bit 8000 Hz stereo
+
+        $ sox file1.wav -r 8000 -c 1 -s file2.gsm -q
+
+
 # Reference
 * https://www.lessons4you.info/how-to-originate-call-from-asterisk-cli/
 * https://www.voip-info.org/wiki/view/Asterisk+cmd+Originate+Chinese
