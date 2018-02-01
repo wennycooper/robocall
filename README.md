@@ -95,6 +95,7 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 
         $ sox file1.wav -r 8000 -c 1 -s file2.gsm -q
 
+* copy gsm files to /usr/share/asterisk/sounds/en_US/
 
 # Reference
 * https://www.lessons4you.info/how-to-originate-call-from-asterisk-cli/
