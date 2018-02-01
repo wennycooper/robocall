@@ -14,18 +14,18 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 
 * config /etc/asterisk/extensions.conf
 
-    [from-internal]
-    exten = 100,1,Answer()
-     same = n,Wait(1)
-    ; same = n,NoOp(hello_kkuei)
-    ; same = n,Playback(demo-instruct)
-     same = n,Background(demo-instruct)
-     same = n,WaitExten(30)
-     same = n,Hangup()
-    
-    exten = 5,1,NoOp(KKUEI ext5)
-    
-    exten = 6,1,NoOp(KKUEI ext6)
+      [from-internal]
+      exten = 100,1,Answer()
+      same = n,Wait(1)
+      ; same = n,NoOp(hello_kkuei)
+      ; same = n,Playback(demo-instruct)
+      same = n,Background(demo-instruct)
+      same = n,WaitExten(30)
+      same = n,Hangup()
+          
+      exten = 5,1,NoOp(KKUEI ext5)
+          
+      exten = 6,1,NoOp(KKUEI ext6)
 
 
 * config /etc/asterisk/sip.conf
@@ -43,38 +43,38 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
 
 * config /etc/dahdi/system.conf
 
-    fxsks=1
-    echocanceller=mg2,1
-    fxsks=2
-    echocanceller=mg2,2
-    fxsks=3
-    echocanceller=mg2,3
-    fxsks=4
-    echocanceller=mg2,4
+      fxsks=1
+      echocanceller=mg2,1
+      fxsks=2
+      echocanceller=mg2,2
+      fxsks=3
+      echocanceller=mg2,3
+      fxsks=4
+      echocanceller=mg2,4
 
-    # Global data
+      # Global data
     
-    loadzone        = us
-    defaultzone     = us
+      loadzone        = us
+      defaultzone     = us
 
 * config /etc/asterisk/chan_dahdi.conf
 
-    ....
-    [channels]
-    #include /etc/asterisk/dahdi-channels.conf
-    ....
+      ....
+      [channels]
+      #include /etc/asterisk/dahdi-channels.conf
+      ....
 
 * config /etc/asterisk/dahdi-channels.conf
 
-    ;;; line="1 WCTDM/0/0 FXSKS  (EC: VPMOCT032 - INACTIVE)"
-    signalling=fxs_ks
-    callerid=asreceived
-    group=0
-    context=from-internal
-    channel => 1
-    callerid=
-    group=
-    context=default
+      ;;; line="1 WCTDM/0/0 FXSKS  (EC: VPMOCT032 - INACTIVE)"
+      signalling=fxs_ks
+      callerid=asreceived
+      group=0
+      context=from-internal
+      channel => 1
+      callerid=
+      group=
+      context=default
 
 # Start the robocall_server
         $ sudo python ./robocall_server.py
