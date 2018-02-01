@@ -2,7 +2,8 @@
 import cherrypy
 import os
 import os.path
-import time
+import sys,time,subprocess,re
+from subprocess import Popen, PIPE, STDOUT
 
 class robocall_server(object):
     @cherrypy.expose
@@ -11,16 +12,39 @@ class robocall_server(object):
 
     @cherrypy.expose
     def robocall(self, roomId=0):
-        cmd = "/home/kkuei/catkin_ws/src/robocall/demo-call.py " + roomId
-        cmd1 = "/home/kkuei/catkin_ws/src/robocall/check_call_status.py"
-        os.system(cmd)
-                
-        value = os.system(cmd1)
-        value = value >> 8
-        print "call status = ", value
-        if value == 1:
+        user_pick_up = False
+        loop_count = 0
+        
+        while loop_count<2:
+            if not user_pick_up:
+                p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+                p.stdin.write('channel originate DAHDI/1/'+roomId+' extension 100@from-internal\n')
+                while True:
+                    line = p.stdout.readline()
+                    if re.search("Hungup",line) is None:
+                        print line.rstrip()
+                        if bool(re.search("NOTICE",line)):
+                            print "Wait for dahdi channel resource!"
+                            time.sleep(10)
+                            break
+                        elif bool(re.search("KKUEI ext5",line)):
+                            user_pick_up = True
+                    else:       # print "Hungup"
+                        time.sleep(5)
+                        if not user_pick_up:
+                            print "Hangup but not pressing 5... back to loop"
+                        loop_count += 1
+                        break
+            elif user_pick_up:
+                print "user_picp_up == True"
+                break
+            else:
+                pass
+
+
+        if user_pick_up == True:
            return "Status: Completed"
-        elif value == 255:
+        elif user_pick_up == False:
            return "Status: Expired"
 
         return str(value)

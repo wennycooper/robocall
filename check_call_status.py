@@ -27,7 +27,7 @@ while FileExit != True :
   time.sleep(1)
 #print "check: value =",value
 cmd = "rm "+callLog
-os.system(cmd)
+#os.system(cmd)
 os._exit(value)
 
 
