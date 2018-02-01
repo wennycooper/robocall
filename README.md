@@ -7,7 +7,9 @@ Callee must anwser the call and press 5 to confirm, or the caller will redial fo
 Please follow the procedure to install asterisk server & dahdi driver.
 
 http://draalin.com/installing-asterisk-in-ubuntu/
+
 https://www.digium.com/sites/digium/files/digium-telephony-card-quickstart-installation-guide.pdf
+
 https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manual.pdf
 
 * config /etc/asterisk/extensions.conf
