@@ -1,19 +1,30 @@
 # robocall
 Robocall is a web service to make a phone call to deliver a pre-recorded messages from AMR robot. 
+Callee must anwser the call and press 5 to confirm, or the caller will redial for 3 times.
 
 # Dependancy
 * Asterisk installation
-Please follow the procedure to install asterisk server.
+Please follow the procedure to install asterisk server & dahdi driver.
 
 http://draalin.com/installing-asterisk-in-ubuntu/
+https://www.digium.com/sites/digium/files/digium-telephony-card-quickstart-installation-guide.pdf
+https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manual.pdf
 
 * config /etc/asterisk/extensions.conf
 
-        [from-internal]
-        exten = 100,1,Answer()
-        same = n,Wait(1)
-        same = n,Playback(hello-world)
-        same = n,Hangup()
+    [from-internal]
+    exten = 100,1,Answer()
+     same = n,Wait(1)
+    ; same = n,NoOp(hello_kkuei)
+    ; same = n,Playback(demo-instruct)
+     same = n,Background(demo-instruct)
+     same = n,WaitExten(30)
+     same = n,Hangup()
+    
+    exten = 5,1,NoOp(KKUEI ext5)
+    
+    exten = 6,1,NoOp(KKUEI ext6)
+
 
 * config /etc/asterisk/sip.conf
 
@@ -28,14 +39,47 @@ http://draalin.com/installing-asterisk-in-ubuntu/
         disallow=all
         allow=ulaw
 
-* TODO: config /etc/asterisk/DAHDI.conf
+* config /etc/dahdi/system.conf
+
+    fxsks=1
+    echocanceller=mg2,1
+    fxsks=2
+    echocanceller=mg2,2
+    fxsks=3
+    echocanceller=mg2,3
+    fxsks=4
+    echocanceller=mg2,4
+
+    # Global data
+    
+    loadzone        = us
+    defaultzone     = us
+
+* config /etc/asterisk/chan_dahdi.conf
+
+    ....
+    [channels]
+    #include /etc/asterisk/dahdi-channels.conf
+    ....
+
+* config /etc/asterisk/dahdi-channels.conf
+
+    ;;; line="1 WCTDM/0/0 FXSKS  (EC: VPMOCT032 - INACTIVE)"
+    signalling=fxs_ks
+    callerid=asreceived
+    group=0
+    context=from-internal
+    channel => 1
+    callerid=
+    group=
+    context=default
 
 # Start the robocall_server
-        $ python ./robocall_server.py
+        $ sudo python ./robocall_server.py
 
 
 # Making a call request from any web client
-        http://192.168.30.83:8080/robocall?roomId=6001
+        http://192.168.30.222:8080/robocall?roomId=15
 
 # Response
 * Status: Completed
