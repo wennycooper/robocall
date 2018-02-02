@@ -1,5 +1,6 @@
 # robocall
 Robocall is a web service to make a phone call to deliver a pre-recorded messages from AMR robot. 
+Also, the call will deliver a password code (defined by the "pw" parameter in the request URI)
 Callee must anwser the call and press a "0" to confirm, or the caller will redial for several times.
 
 # Dependancy
