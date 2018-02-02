@@ -11,13 +11,14 @@ class robocall_server(object):
         return "Hello world!"
 
     @cherrypy.expose
-    def robocall(self, roomId=0):
+    def robocall(self, roomId=0, pw=1234):
         user_pick_up = False
         loop_count = 0
         
         while loop_count<2:
             if not user_pick_up:
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+                p.stdin.write('dialplan set global pw '+pw+'\n')
                 p.stdin.write('channel originate DAHDI/1/'+roomId+' extension 100@from-internal\n')
                 while True:
                     line = p.stdout.readline()
