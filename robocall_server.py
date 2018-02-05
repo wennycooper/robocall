@@ -15,7 +15,7 @@ class robocall_server(object):
         user_pick_up = False
         loop_count = 0
         
-        while loop_count<2:
+        while loop_count<3:
             if not user_pick_up:
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
                 p.stdin.write('dialplan set global pw '+pw+'\n')
