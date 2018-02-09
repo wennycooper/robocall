@@ -77,8 +77,9 @@ https://www.digium.com/sites/digium/files/analog-telephony-card-4-port-user-manu
         //roomId = room id to call
 
 # Response
-* Status: Completed
-* Status: Expired
+* Status: Completed  // 有接通 且有按 0
+* Status: Expired    // 沒接通 或是沒按 0
+* Status: Invalid roomId   // 無效的房號
 
 # Convert wav file to gsm file
 * wav file must be in 16 bit 8000 Hz stereo
