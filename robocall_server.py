@@ -13,7 +13,7 @@ class robocall_server(object):
     @cherrypy.expose
     def robocall(self, roomId=0, pw=1234):
         roomIdSet = set([
-            '11','12','15','0100',
+            '11','12','15','0100','0015',
             '0201','0202','0203','0204','0205','0206','0207','0208','0209','0210','0211','0212','0213','0214','0215','0216','0217','0218','0219','0220','0221','0222',
             '0301','0302','0303','0304','0305','0306','0307','0308','0309','0310','0311','0312','0313','0314','0315','0316','0317','0318','0319','0320','0321','0322',
             '0401','0402','0403','0404','0405','0406','0407','0408','0409','0410','0411','0412','0413','0414','0415','0416','0417','0418','0419','0420','0421','0422',
@@ -33,7 +33,9 @@ class robocall_server(object):
             if not user_pick_up:
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
                 p.stdin.write('dialplan set global pw '+pw+'\n')
-                p.stdin.write('channel originate DAHDI/1/'+roomId+' extension 100@from-internal\n')
+                ss0 = 'channel originate DAHDI/1/'+str(int(roomId))+' extension 100@from-internal\n'
+                print ss0
+                p.stdin.write(ss0)
                 while True:
                     line = p.stdout.readline()
                     if re.search("Hungup",line) is None:
