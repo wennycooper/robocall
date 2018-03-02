@@ -1,5 +1,7 @@
 #!/usr/bin/python
+#from __future__ import print_function
 import cherrypy
+import requests
 import os
 import os.path
 import sys,time,subprocess,re
@@ -54,12 +56,12 @@ class robocall_server(object):
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
                 p.stdin.write('dialplan set global pw '+pw+'\n')
                 ss0 = 'channel originate DAHDI/1/'+str(int(roomId))+' extension 100@from-internal\n'
-                print ss0
+                print(ss0)
                 p.stdin.write(ss0)
                 while True:
                     line = p.stdout.readline()
                     if re.search("Hungup",line) is None:
-                        print line.rstrip()
+                        print(line.rstrip())
                         if bool(re.search("NOTICE",line)):
                             print "Wait for dahdi channel resource!"
                             time.sleep(10)
@@ -82,6 +84,11 @@ class robocall_server(object):
         if user_pick_up == True:
            return "Status: Completed"
         elif user_pick_up == False:
+           print("request push notification!")
+           # push notification
+           msg = "robocall no answer to room: "+str(roomId) 
+           s00 = requests.Session()
+           r00 = s00.get('http://192.168.25.210:8080/' + 'push?msg=' + msg)
            return "Status: Expired"
 
         return str(value)
