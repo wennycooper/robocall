@@ -4,11 +4,31 @@ import os
 import os.path
 import sys,time,subprocess,re
 from subprocess import Popen, PIPE, STDOUT
+from pushy import PushyAPI
 
 class robocall_server(object):
+    push_token=[]
+
     @cherrypy.expose
     def index(self):
         return "Hello world!"
+
+    @cherrypy.expose
+    def set_token(self,token):
+        self.push_token.append(token)
+        return "set token:"+token
+
+    @cherrypy.expose
+    def push(self,msg):
+        print ('push:'+msg)
+        data = {'message': msg}
+        PushyAPI.sendPushNotification(data, self.push_token, None)
+        return "notification pushed:"+msg
+    
+    @cherrypy.expose
+    def shutdown(self):  
+        cherrypy.engine.exit()
+
 
     @cherrypy.expose
     def robocall(self, roomId=0, pw=1234):
