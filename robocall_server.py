@@ -17,7 +17,9 @@ class robocall_server(object):
 
     @cherrypy.expose
     def set_token(self,token):
-        self.push_token.append(token)
+        if not token in self.push_token:
+            self.push_token.append(token)
+        print(self.push_token)
         return "set token:"+token
 
     @cherrypy.expose
