@@ -90,7 +90,7 @@ class robocall_server(object):
            # push notification
            msg = "robocall no answer to room: "+str(roomId) 
            s00 = requests.Session()
-           r00 = s00.get('http://192.168.25.210:8080/' + 'push?msg=' + msg)
+           r00 = s00.get('http://192.168.65.100:8080/' + 'push?msg=' + msg)
            return "Status: Expired"
 
         return str(value)
