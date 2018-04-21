@@ -5,10 +5,13 @@ import requests
 import os
 import os.path
 import sys,time,subprocess,re
+import logging
 from subprocess import Popen, PIPE, STDOUT
 from pushy import PushyAPI
 reload(sys)
 sys.setdefaultencoding('utf-8')
+
+
 
 class robocall_server(object):
     push_token=[]
@@ -35,6 +38,10 @@ class robocall_server(object):
     def shutdown(self):  
         cherrypy.engine.exit()
 
+    @cherrypy.expose
+    def logging(self, msg):
+        logging.basicConfig(filename='/home/advrobot/robocall_server.log',format='%(asctime)s %(levelname)s: %(message)s',level=logging.DEBUG)
+        logging.info(msg)
 
     @cherrypy.expose
     def robocall(self, roomId=0, pw=1234):
