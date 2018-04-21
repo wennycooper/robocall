@@ -11,8 +11,6 @@ from pushy import PushyAPI
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
-
 class robocall_server(object):
     push_token=[]
 
@@ -29,7 +27,7 @@ class robocall_server(object):
 
     @cherrypy.expose
     def push(self,msg):
-        print ('push:'+msg)
+        #print ('push:'+msg)
         data = {'message': msg}
         PushyAPI.sendPushNotification(data, self.push_token, None)
         return "notification pushed:"+msg
