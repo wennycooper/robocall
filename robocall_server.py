@@ -7,6 +7,8 @@ import os.path
 import sys,time,subprocess,re
 from subprocess import Popen, PIPE, STDOUT
 from pushy import PushyAPI
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 class robocall_server(object):
     push_token=[]
@@ -53,6 +55,8 @@ class robocall_server(object):
         user_pick_up = False
         loop_count = 0
         
+        # don't make calls for testing purposes
+        # user_pick_up = True
         while loop_count<3:
             if not user_pick_up:
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
@@ -81,7 +85,6 @@ class robocall_server(object):
                 break
             else:
                 pass
-
 
         if user_pick_up == True:
            return "Status: Completed"
