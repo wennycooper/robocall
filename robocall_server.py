@@ -55,8 +55,9 @@ class robocall_server(object):
         user_pick_up = False
         loop_count = 0
         
-        # don't make calls for testing purposes
+        # uncomment this line to ignore making calls for testing purposes
         # user_pick_up = True
+
         while loop_count<3:
             if not user_pick_up:
                 p = subprocess.Popen('asterisk -rvvvvv',shell=True, stdout=PIPE, stdin=PIPE, stderr=STDOUT)
