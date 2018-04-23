@@ -93,14 +93,22 @@ class robocall_server(object):
                 pass
 
         if user_pick_up == True:
-           return "Status: Completed"
+            return "Status: Completed"
         elif user_pick_up == False:
-           print("request push notification!")
-           # push notification
-           msg = "robocall no answer to room: "+str(roomId) 
-           s00 = requests.Session()
-           r00 = s00.get('http://192.168.65.100:8080/' + 'push?msg=' + msg)
-           return "Status: Expired"
+            print("request push notification!")
+
+            # push notification
+            s = requests.Session()
+            a={ 'msg': '机器人送行李到'+str(roomId)+'却无人接听' }
+            announceMsg1 = urllib.urlencode(a)
+            uri = str('http://192.168.65.100:8080/push?' + announceMsg1)
+    
+            try:
+                r = s.get(uri)
+            except:
+                print("[robocall] push notification failure")
+
+            return "Status: Expired"
 
         return str(value)
         #return "robocall with roomId = " + str(int(roomId))
