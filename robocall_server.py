@@ -12,6 +12,13 @@ from pushy import PushyAPI
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+
+ROBOCALL_LOG = '/home/advrobot/robocall_server.log'
+# ROBOCALL_LOG = '/home/kkuei/robocall_server.log'
+
+ROBOCALL_IP = '192.168.65.100'
+# ROBOCALL_IP = '192.168.30.59'
+
 class robocall_server(object):
     push_token=[]
 
@@ -39,7 +46,7 @@ class robocall_server(object):
 
     @cherrypy.expose
     def logging(self, msg):
-        logging.basicConfig(filename='/home/advrobot/robocall_server.log',format='%(asctime)s %(levelname)s: %(message)s',level=logging.DEBUG)
+        logging.basicConfig(filename=ROBOCALL_LOG,format='%(asctime)s %(levelname)s: %(message)s',level=logging.DEBUG)
         logging.info(msg)
 
     @cherrypy.expose
@@ -102,7 +109,7 @@ class robocall_server(object):
             s = requests.Session()
             a={ 'msg': '机器人送行李到'+str(roomId)+'却无人接听' }
             announceMsg1 = urllib.urlencode(a)
-            uri = str('http://192.168.65.100:8080/push?' + announceMsg1)
+            uri = str('http://' + ROBOCALL_IP + ':8080/push?' + announceMsg1)
     
             try:
                 r = s.get(uri)
