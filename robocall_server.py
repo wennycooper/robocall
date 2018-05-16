@@ -46,6 +46,7 @@ class robocall_server(object):
 
     @cherrypy.expose
     def logging(self, msg):
+        logging.getLogger("cherrypy").propagate = False
         logging.basicConfig(filename=ROBOCALL_LOG,format='%(asctime)s %(levelname)s: %(message)s',level=logging.DEBUG)
         logging.info(msg)
 
